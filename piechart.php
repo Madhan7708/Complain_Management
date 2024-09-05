@@ -9,8 +9,5 @@ $data = array();
 while($row = $result->fetch_assoc()) {
     $data[] = $row;
 }
-
-$conn->close();
-
 echo json_encode($data);
 ?>
