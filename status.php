@@ -118,7 +118,7 @@
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="requirement.html" aria-expanded="false"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Requirements</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="complain.html" aria-expanded="false"><i class="mdi mdi-chart-bubble"></i><span class="hide-menu">Complain Status</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="tables.html" aria-expanded="false"><i class="mdi mdi-border-inside"></i><span class="hide-menu">Change Password</span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="status.html" aria-expanded="false"><i class="mdi mdi-border-inside"></i><span class="hide-menu">Work Category</span></a></li>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="status.php" aria-expanded="false"><i class="mdi mdi-border-inside"></i><span class="hide-menu">Work Category</span></a></li>
                         
                     </ul>
                       
@@ -218,29 +218,46 @@
     <script src="dist/js/pages/chart/chart-page-init.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.1.1/chart.min.js"></script>
     <script>
-        var chrt = document.getElementById("chartId").getContext("2d");
-      var chartId = new Chart(chrt, {
-         type: 'pie',
-         data: {
-            labels: ["Electrical work", "Carpenter work", "Civil work", "Partition work", "IT infra work", "Plumbing work"],
-            datasets: [{
-               label: "online tutorial subjects",
-               data: [20, 40, 13, 35, 20, 38],
-               backgroundColor: ['yellow', 'aqua', 'pink', 'lightgreen', 'gold', 'lightblue'],
-               hoverOffset: 5
-            }],
-         },
-         options: {
-            responsive: false,
-            plugins: {
-               legend: {
-                  position: 'right', // This aligns the labels to the right
-                  align: 'center',   // This centers the labels vertically on the right side
-               },
-            },
-         },
-      });
-     </script>
+        async function fetchData() {
+            const response = await fetch('piechart.php');
+            const data = await response.json();
+            return data;
+        }
+
+        function createChart(labels, data) {
+            var ctx = document.getElementById("chartId").getContext("2d");
+            new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: "Problem Types",
+                        data: data,
+                        backgroundColor: ['yellow', 'aqua', 'pink', 'lightgreen', 'gold', 'lightblue'],
+                        hoverOffset: 5
+                    }],
+                },
+                options: {
+                    responsive: false,
+                    plugins: {
+                        legend: {
+                            position: 'right',
+                            align: 'center',
+                        },
+                    },
+                },
+            });
+        }
+
+        async function initializeChart() {
+            const data = await fetchData();
+            const labels = data.map(item => item.type_of_problem);
+            const counts = data.map(item => item.count);
+            createChart(labels, counts);
+        }
+
+        initializeChart();
+    </script>
 </body>
 
 </html>
