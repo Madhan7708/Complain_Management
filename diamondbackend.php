@@ -27,12 +27,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $row4 = mysqli_fetch_assoc($output4);
     $pendingCount = $row4['pending'];
 
-    //fetch reassigned work
-
-    $query5 = "SELECT COUNT(*) as reassign FROM complaints_detail WHERE (status ='14')";
+    //fetch request count
+    $query5 = "SELECT COUNT(*) as request FROM complaints_detail WHERE status ='6'";
     $output5 = mysqli_query($conn, $query5);
     $row5 = mysqli_fetch_assoc($output5);
-    $reassignCount = $row5['reassign'];
+    $requestCount = $row5['request'];
+
+    //fetch reassigned work
+
+    $query6 = "SELECT COUNT(*) as reassign FROM complaints_detail WHERE (status ='14')";
+    $output6 = mysqli_query($conn, $query6);
+    $row6 = mysqli_fetch_assoc($output6);
+    $reassignCount = $row6['reassign'];
 
     // Return the counts as a JSON object
     echo json_encode(array(
@@ -40,7 +46,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         "completedCount" => $completedCount,
         "inprogressCount" => $inprogressCount,
         "pendingCount" => $pendingCount,
+        "requestCount" => $requestCount,
         "reassignCount" => $reassignCount
+
 
 
     ));
