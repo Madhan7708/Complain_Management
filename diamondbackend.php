@@ -35,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     //fetch reassigned work
 
-    $query6 = "SELECT COUNT(*) as reassign FROM complaints_detail WHERE (status ='14')";
+    $query6 = "SELECT COUNT(*) as reassign FROM complaints_detail WHERE status ='14'";
     $output6 = mysqli_query($conn, $query6);
     $row6 = mysqli_fetch_assoc($output6);
     $reassignCount = $row6['reassign'];

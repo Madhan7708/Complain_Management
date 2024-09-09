@@ -63,3 +63,4 @@ if (isset($_POST['get_image'])) {
     $stmt->close();
     $conn->close();
 }
+?>
