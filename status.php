@@ -207,7 +207,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.1.1/chart.min.js"></script>
     <script>
         async function fetchData() {
-            const response = await fetch('piechart.php');
+            const response = await fetch('backend1.php');
             const data = await response.json();
             return data;
         }

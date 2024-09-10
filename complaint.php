@@ -615,7 +615,7 @@ $result2 = mysqli_query($conn, $sql2);
                                 <!-- ============================================================== -->
                                 <!-- footer -->
                                 <!-- ============================================================== -->
-                                <footer class="footer text-center">
+                                <footer class="footer text-center ps-4">
                                     
                                         <b> Developed and Maintained by Technology Innovation Hub.</b>
                                 </footer>

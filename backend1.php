@@ -166,4 +166,21 @@ if (isset($_POST['id'])) {
     // Return the description as the AJAX response
     echo $row['problem_description'];
 }
+
+//piechart backend code
+
+header('Content-Type: application/json');
+$sql = "SELECT type_of_problem, COUNT(*) as count FROM complaints_detail GROUP BY type_of_problem";
+$result = $conn->query($sql);
+
+$data = array();
+while($row = $result->fetch_assoc()) {
+    $data[] = $row;
+}
+echo json_encode($data);
+
+//diamond box backend code
+
+
+
 ?>
