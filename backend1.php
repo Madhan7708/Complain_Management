@@ -1,5 +1,7 @@
 <?php
     include "db.php"; 
+
+    //requirements approved
 if (isset($_POST['approve_user'])) {
     $customer_id = mysqli_real_escape_string($conn, $_POST['user_id']);
 
@@ -27,6 +29,8 @@ if (isset($_POST['approve_user'])) {
         return;
     }
 }
+
+//requirements rejected
 
 if (isset($_POST['save_reason'])) {
     try {
@@ -67,5 +71,99 @@ if (isset($_POST['save_reason'])) {
         ];
         echo json_encode($res);
     }
+}
+
+ //comments query
+
+if (isset($_POST['edit_user'])) {
+    $customer_id = mysqli_real_escape_string($conn, $_POST['user_id']);
+  
+    $query = "SELECT * FROM manager WHERE task_id='$customer_id'";
+    $query_run = mysqli_query($conn, $query);
+  
+    $User_data = mysqli_fetch_array($query_run);
+  
+  
+    if ($query_run) {
+      $res = [
+        'status' => 200,
+        'message' => 'details Fetch Successfully by id',
+        'data' => $User_data,
+        'readonly' => !empty($User_data['comment_query'])
+    ];
+        echo json_encode($res);
+        return;
+    } else {
+        $res = [
+            'status' => 500,
+            'message' => 'Details Not Deleted'
+        ];
+        echo json_encode($res);
+        return;
+    }
+  }
+  
+  //User edit
+  if (isset($_POST['save_edituser'])) {
+    $customer_id = mysqli_real_escape_string($conn, $_POST['task_id']);
+    $query = mysqli_real_escape_string($conn, $_POST['comment_query']);
+    $reply = mysqli_real_escape_string($conn, $_POST['comment_reply']);
+  
+    $query = "UPDATE manager SET comment_query='$query' WHERE task_id='$customer_id'";
+    $query_run = mysqli_query($conn, $query);
+  
+    if ($query_run) {
+      $res = [
+        'status' => 200,
+        'message' => 'details Updated Successfully'
+    ];
+        echo json_encode($res);
+        return;
+    } else {
+        $res = [
+            'status' => 500,
+            'message' => 'Details Not Deleted'
+        ];
+        echo json_encode($res);
+        return;
+    }
+  }
+
+
+  //get image
+  if (isset($_POST['get_image'])) {
+    $user_id = $_POST['user_id'];
+
+    // Query to fetch the image based on user ID
+    $query = "SELECT id, images FROM complaints_detail WHERE id = ?";
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param('i', $user_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        echo json_encode(['status' => 200, 'data' => $row]);
+    } else {
+        echo json_encode(['status' => 500, 'message' => 'Image not found']);
+    }
+
+    $stmt->close();
+    $conn->close();
+}
+
+
+
+//set color in inprogress work
+if (isset($_POST['id'])) {
+    $complaintId = $_POST['id'];
+    
+    // Fetch the complaint description based on the ID
+    $sql = "SELECT problem_description FROM complaints_detail WHERE id = $complaintId";
+    $result = mysqli_query($conn, $sql);
+    $row = mysqli_fetch_assoc($result);
+    
+    // Return the description as the AJAX response
+    echo $row['problem_description'];
 }
 ?>
