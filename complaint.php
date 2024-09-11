@@ -417,7 +417,7 @@ $result2 = mysqli_query($conn, $sql2);
                                                             </thead>
                                                             <tbody>
                                                                 <?php
-                                                                $sql2 = "SELECT complaints_detail.*,manager.* FROM complaints_detail LEFT JOIN manager on complaints_detail.id=manager.problem_id WHERE status IN (8, 9,10, 15)";
+                                                                $sql2 = "SELECT complaints_detail.*,manager.* FROM complaints_detail LEFT JOIN manager on complaints_detail.id=manager.problem_id WHERE status IN (7, 8,9, 15)";
                                                                 $result2 = mysqli_query($conn, $sql2);
                                                                 $s = 1;
                                                                 while ($row = mysqli_fetch_array($result2)) {
@@ -449,11 +449,11 @@ $result2 = mysqli_query($conn, $sql2);
                                                                         <td class="text-center"><?php echo $row['date_of_reg'] ?></td>
                                                                         <td class="text-center"><?php echo $row['days_to_complete'] ?></td>
                                                                         <td class="text-center"><?php
-                                                                                                if ($row['status'] == 8) {
+                                                                                                if ($row['status'] == 7) {
                                                                                                     echo "Worker Pending";
-                                                                                                } elseif ($row['status'] == 9) {
+                                                                                                } elseif ($row['status'] == 8) {
                                                                                                     echo "Worker started to work";
-                                                                                                } elseif ($row['status'] == 10) {
+                                                                                                } elseif ($row['status'] == 9) {
                                                                                                     echo "Worker inProgress";
                                                                                                 } else {
                                                                                                     echo "Sent to Manager for rework";

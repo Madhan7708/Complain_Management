@@ -19,7 +19,7 @@ include("db.php");
   <link href="assets/libs/flot/css/float-chart.css" rel="stylesheet">
   <!-- Custom CSS -->
   <link href="dist/css/style.min.css" rel="stylesheet">
-  <link href="diamond.css" rel="stylesheet">
+  <link href="circle.css" rel="stylesheet">
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
