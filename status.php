@@ -205,45 +205,48 @@
     <script src="dist/js/pages/chart/chart-page-init.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.1.1/chart.min.js"></script>
     <script>
-        async function fetchData() {
-            const response = await fetch('piechart.php');
-            const data = await response.json();
-            return data;
-        }
+       async function fetchData() {
+    const response = await fetch('diamondbackend.php', {
+        method: 'POST' // Ensuring it's a POST request as required by your PHP
+    });
+    const data = await response.json();
+    return data.typeOfProblemCounts; // Accessing the specific key where the data is stored
+}
 
-        function createChart(labels, data) {
-            var ctx = document.getElementById("chartId").getContext("2d");
-            new Chart(ctx, {
-                type: 'pie',
-                data: {
-                    labels: labels,
-                    datasets: [{
-                        label: "Problem Types",
-                        data: data,
-                        backgroundColor: ['#ff953c', 'aqua', 'pink', 'lightgreen', 'gold', 'lightblue'],
-                        hoverOffset: 5
-                    }],
+function createChart(labels, data) {
+    var ctx = document.getElementById("chartId").getContext("2d");
+    new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: "Problem Types",
+                data: data,
+                backgroundColor: ['#ff953c', 'aqua', 'pink', 'lightgreen', 'gold', 'lightblue'],
+                hoverOffset: 5
+            }],
+        },
+        options: {
+            responsive: false,
+            plugins: {
+                legend: {
+                    position: 'right',
+                    align: 'center',
                 },
-                options: {
-                    responsive: false,
-                    plugins: {
-                        legend: {
-                            position: 'right',
-                            align: 'center',
-                        },
-                    },
-                },
-            });
-        }
+            },
+        },
+    });
+}
 
-        async function initializeChart() {
-            const data = await fetchData();
-            const labels = data.map(item => item.type_of_problem);
-            const counts = data.map(item => item.count);
-            createChart(labels, counts);
-        }
+async function initializeChart() {
+    const data = await fetchData();
+    const labels = data.map(item => item.type_of_problem); // Mapping labels from fetched data
+    const counts = data.map(item => item.count); // Mapping counts from fetched data
+    createChart(labels, counts);
+}
 
-        initializeChart();
+initializeChart();
+
     </script>
 </body>
 
