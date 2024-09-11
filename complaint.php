@@ -224,7 +224,7 @@ $result2 = mysqli_query($conn, $sql2);
                     <div class="col">
                         <div class="card">
                             <div class="card-body">
-                                <h4>Complaint Status</h4>
+                                
                                 <!-- Nav tabs -->
                                 <ul class="nav nav-tabs" role="tablist">
                                     <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#completed"
