@@ -137,12 +137,13 @@ include("db.php");
           <div class="col-12 d-flex no-block align-items-center">
             <h4 class="page-title">Welcome Principal,</h4>
             <div class="ml-auto text-right">
+
+              <!-- to show an work category  modal -->
               <nav aria-label="breadcrumb">
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#piechart">
                   Work Category
                 </button>
               </nav>
-              <!-- Button trigger modal -->
 
             </div>
           </div>
@@ -284,7 +285,7 @@ include("db.php");
 
   </div>
 
-  <footer class="footer text-center">
+  <footer class="footer text-center" style="padding-left: 250px;">
     <b>2024 © M.Kumarasamy College of Engineering All Rights Reserved.<br>
       Developed and Maintained by Technology Innovation Hub.</b>
   </footer>

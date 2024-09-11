@@ -99,7 +99,7 @@ $result2 = mysqli_query($conn, $sql2);
                         </b>
                         <!--End Logo icon -->
                         <!-- Logo text -->
-                        
+
                         <!-- Logo icon -->
                         <!-- <b class="logo-icon"> -->
                         <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
@@ -171,11 +171,10 @@ $result2 = mysqli_query($conn, $sql2);
 
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav" class="p-t-30">
-                    <li class="sidebar-item" > <a class="sidebar-link waves-effect waves-dark sidebar-link" href="index.php" aria-expanded="false"><i class="mdi mdi-view-dashboard" ></i><span class="hide-menu">Dashboard</span></a></li>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="index.php" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span class="hide-menu">Dashboard</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="requirements1.php" aria-expanded="false"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Requirements</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="complaint.php" aria-expanded="false"><i class="mdi mdi-chart-bubble"></i><span class="hide-menu">Complaint Status</span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="status.php" aria-expanded="false"><i class="mdi mdi-border-inside"></i><span class="hide-menu">Work Category</span></a></li>
-                        
+
                     </ul>
                 </nav>
                 <!-- End Sidebar navigation -->
@@ -224,7 +223,7 @@ $result2 = mysqli_query($conn, $sql2);
                     <div class="col">
                         <div class="card">
                             <div class="card-body">
-                                
+
                                 <!-- Nav tabs -->
                                 <ul class="nav nav-tabs" role="tablist">
                                     <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#completed"
@@ -625,7 +624,7 @@ $result2 = mysqli_query($conn, $sql2);
 
 
 
-    <footer class="footer text-center">
+    <footer class="footer text-center" style="padding-left: 250px;">
         <b>2024 © M.Kumarasamy College of Engineering All Rights Reserved.<br>
             Developed and Maintained by Technology Innovation Hub.</b>
     </footer>
