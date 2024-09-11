@@ -166,3 +166,5 @@ if (isset($_POST['id'])) {
     // Return the description as the AJAX response
     echo $row['problem_description'];
 }
+
+?>
