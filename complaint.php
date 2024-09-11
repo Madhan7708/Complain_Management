@@ -20,7 +20,7 @@ $result2 = mysqli_query($conn, $sql2);
     <!-- Bootstrap CSS (Optional but recommended) -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
-    <title>MKCE</title>
+    <title>Mkce Complain Management Systems</title>
     <!-- Custom CSS -->
     <link href="dist/css/style.min.css" rel="stylesheet">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -174,7 +174,6 @@ $result2 = mysqli_query($conn, $sql2);
                     <li class="sidebar-item" > <a class="sidebar-link waves-effect waves-dark sidebar-link" href="index.php" aria-expanded="false"><i class="mdi mdi-view-dashboard" ></i><span class="hide-menu">Dashboard</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="requirements1.php" aria-expanded="false"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Requirements</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="complaint.php" aria-expanded="false"><i class="mdi mdi-chart-bubble"></i><span class="hide-menu">Complaint Status</span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="tables.html" aria-expanded="false"><i class="mdi mdi-border-inside"></i><span class="hide-menu">Change Password</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="status.php" aria-expanded="false"><i class="mdi mdi-border-inside"></i><span class="hide-menu">Work Category</span></a></li>
                         
                     </ul>
@@ -201,7 +200,7 @@ $result2 = mysqli_query($conn, $sql2);
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="index.php">Home</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">Complaint Status</li>
+                                    <li class="breadcrumb-item active" aria-current="page">Complaint</li>
                                 </ol>
                             </nav>
                         </div>
@@ -428,12 +427,12 @@ $result2 = mysqli_query($conn, $sql2);
 
                                                                     // Get the current date
                                                                     $current_date = date('Y-m-d');
-                                                            
+
                                                                     // Check if the deadline is exceeded
                                                                     $is_deadline_exceeded = ($current_date > $deadline_date) ? true : false;
-                                                            
+
                                                                     // Apply the background color if the deadline is exceeded
-                                                                    $row_style = $is_deadline_exceeded ? 'background-color: rgba(255, 0, 0, 0.2);' : ''; 
+                                                                    $row_style = $is_deadline_exceeded ? 'background-color: rgba(255, 0, 0, 0.2);' : '';
                                                                 ?>
                                                                     <tr style="<?php echo $row_style; ?>">
                                                                         <td class="text-center"><?php echo $s ?></td>
@@ -553,9 +552,9 @@ $result2 = mysqli_query($conn, $sql2);
                                                                 $s = 1;
                                                                 while ($row = mysqli_fetch_array($result3)) {
                                                                     $modal_id = "problem2" . $s;
-                                                                    
+
                                                                 ?>
-                                                                    <tr >
+                                                                    <tr>
                                                                         <td class="text-center"><?php echo $s ?></td>
                                                                         <td class="text-center"><?php echo $row['department'] ?></td>
                                                                         <td class="text-center"><?php echo $row['block_venue'] ?></td>
@@ -602,244 +601,246 @@ $result2 = mysqli_query($conn, $sql2);
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-                    
+
                                 <!-- ============================================================== -->
                                 <!-- End Container fluid  -->
                                 <!-- ============================================================== -->
                                 <!-- ============================================================== -->
                                 <!-- footer -->
                                 <!-- ============================================================== -->
-                                <footer class="footer text-center ps-4">
-                                    
-                                        <b> Developed and Maintained by Technology Innovation Hub.</b>
-                                </footer>
+
                                 <!-- ============================================================== -->
                                 <!-- End footer -->
                                 <!-- ============================================================== -->
-                </div>
+                            </div>
                             <!-- ============================================================== -->
                             <!-- End Page wrapper  -->
                             <!-- ============================================================== -->
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-        
-
-                        <!--Description id=problem-->
-                        <!-- Problem Description Modal -->
-                        <div class="modal fade" id="problemModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Problem Description</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <textarea id="problem_description" name="problem_description" class="form-control" readonly></textarea>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="modal fade" id="imageModal" tabindex="-1" role="dialog" aria-labelledby="imageModalLabel" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="imageModalLabel">Problem Image</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <form id="rejectreason">
-                                        <div class="modal-body">
-                                            <img id="modalImage" src="" alt="Image" class="img-fluid" style="width:1500px;height:250px;">
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-                        <script>
-                            $(document).on('click', '.details', function(e) {
-                                e.preventDefault();
-                                var user_id = $(this).val();
-                                console.log(user_id)
-                                $.ajax({
-                                    type: "POST",
-                                    url: "backend1.php",
-                                    data: {
-                                        'edit_user': true,
-                                        'user_id': user_id
-                                    },
-                                    success: function(response) {
-
-                                        var res = jQuery.parseJSON(response);
-                                        console.log(res);
-                                        if (res.status == 500) {
-                                            alert(res.message);
-                                        } else {
-                                            //$('#student_id2').val(res.data.uid);
-
-                                            $('#task_id').val(res.data.task_id);
-                                            $('#comment_query').val(res.data.comment_query);
-                                            $('#comment_reply').val(res.data.comment_reply);
-                                            if (res.readonly) {
-                                                $('#comment_query').prop('readonly', true);
-                                            } else {
-                                                $('#comment_query').prop('readonly', false);
-                                            }
-                                            $('#comment').modal('show');
-                                        }
-                                    }
-                                });
-                            });
-                            $(document).on('click', '.viewDescription', function() {
-                                var complaintId = $(this).data('id'); // Get the complaint ID from the button's data-id attribute
-                                console.log(complaintId);
-                                // Send an AJAX request to fetch the description from the database using the complaint ID
-                                $.ajax({
-                                    url: 'backend1.php', // Create this PHP file to handle fetching data
-                                    method: 'POST',
-                                    data: {
-                                        id: complaintId
-                                    },
-                                    success: function(response) {
-                                        $('#problem_description').val(response); // Populate the textarea with the fetched description
-                                    }
-                                });
-                            });
-
-                            $(document).on('submit', '#comment_det', function(e) {
-                                e.preventDefault();
-                                var formData = new FormData(this);
-                                console.log(formData)
-                                formData.append("save_edituser", true);
-                                $.ajax({
-                                    type: "POST",
-                                    url: "backend1.php",
-                                    data: formData,
-                                    processData: false,
-                                    contentType: false,
-                                    success: function(response) {
-                                        console.log(response);
-                                        var res = jQuery.parseJSON(response);
-                                        if (res.status == 200) {
-                                            $('#comment').modal('hide');
-                                            $('#comment_det')[0].reset();
-                                            $('#dataTable1').load(location.href + " #dataTable1");
-                                            alertify.error('Rejected Successfully');
-
-                                        } else if (res.status == 500) {
-                                            $('#comment').modal('hide');
-                                            $('#comment_det')[0].reset();
-                                            console.error("Error:", res.message);
-                                            alert("Something Went wrong.! try again")
-                                        }
-                                    }
-                                });
-                            });
-                        </script>
-        
+    </div>
 
 
 
-                        <!-- End Wrapper -->
-                        <!-- ============================================================== -->
-                        <!-- ============================================================== -->
-                        <!-- All Jquery -->
-                        <!-- ============================================================== -->
+    <footer class="footer text-center">
+        <b>2024 © M.Kumarasamy College of Engineering All Rights Reserved.<br>
+            Developed and Maintained by Technology Innovation Hub.</b>
+    </footer>
+    <!--Description id=problem-->
+    <!-- Problem Description Modal -->
+    <div class="modal fade" id="problemModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Problem Description</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <textarea id="problem_description" name="problem_description" class="form-control" readonly></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="imageModal" tabindex="-1" role="dialog" aria-labelledby="imageModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="imageModalLabel">Problem Image</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form id="rejectreason">
+                    <div class="modal-body">
+                        <img id="modalImage" src="" alt="Image" class="img-fluid" style="width:1500px;height:250px;">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 
 
-                        <!-- Bootstrap tether Core JavaScript -->
 
-                        <script src="assets/libs/popper.js/dist/umd/popper.min.js"></script>
-                        <script src="assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>
-                        <!-- slimscrollbar scrollbar JavaScript -->
-                        <script src="assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js"></script>
-                        <script src="assets/extra-libs/sparkline/sparkline.js"></script>
-                        <!--Wave Effects -->
-                        <script src="dist/js/waves.js"></script>
-                        <!--Menu sidebar -->
-                        <script src="dist/js/sidebarmenu.js"></script>
-                        <!--Custom JavaScript -->
-                        <script src="dist/js/custom.min.js"></script>
-                        <!--for data table-->
-                        <script src="assets/extra-libs/DataTables/datatables.min.js"></script>
-                        <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+    <!-- End Wrapper -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- All Jquery -->
+    <!-- ============================================================== -->
 
-                        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-                        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
-                        <script src="https://cdnjs.cloudflare.com/ajax/libs/AlertifyJS/1.13.1/alertify.min.js" integrity="sha512-JnjG+Wt53GspUQXQhc+c4j8SBERsgJAoHeehagKHlxQN+MtCCmFDghX9/AcbkkNRZptyZU4zC8utK59M5L45Iw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-                        <script>
-                            //image
-                            // Show image
-                            $(document).on('click', '.showImage', function() {
-                                var user_id = $(this).data('id'); // Get the user ID from data attribute
-                                console.log(user_id);
 
-                                $.ajax({
-                                    type: "POST",
-                                    url: "backend1.php",
-                                    data: {
-                                        'get_image': true,
-                                        'user_id': user_id
-                                    },
-                                    success: function(response) {
-                                        var res = jQuery.parseJSON(response);
-                                        console.log(res);
+    <!-- Bootstrap tether Core JavaScript -->
 
-                                        if (res.status == 500) {
-                                            alert(res.message);
-                                        } else {
-                                            $('#modalImage').attr('src', 'uploads/' + res.data.images); // Dynamically set the image source
-                                            $('#imageModal').modal('show'); // Show the modal
-                                        }
-                                    }
-                                });
-                            });
-                       
+    <script src="assets/libs/popper.js/dist/umd/popper.min.js"></script>
+    <script src="assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- slimscrollbar scrollbar JavaScript -->
+    <script src="assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js"></script>
+    <script src="assets/extra-libs/sparkline/sparkline.js"></script>
+    <!--Wave Effects -->
+    <script src="dist/js/waves.js"></script>
+    <!--Menu sidebar -->
+    <script src="dist/js/sidebarmenu.js"></script>
+    <!--Custom JavaScript -->
+    <script src="dist/js/custom.min.js"></script>
+    <!--for data table-->
+    <script src="assets/extra-libs/DataTables/datatables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
 
-                        
-                            $(document).ready(function() {
-                                $('#dataTable').DataTable();
-                            });
-                        
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-                       
-                            $(document).ready(function() {
-                                // Initialize DataTable
-                                var table = $('#dataTable1').DataTable();
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/AlertifyJS/1.13.1/alertify.min.js" integrity="sha512-JnjG+Wt53GspUQXQhc+c4j8SBERsgJAoHeehagKHlxQN+MtCCmFDghX9/AcbkkNRZptyZU4zC8utK59M5L45Iw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        //image
+        // Show image
+        $(document).on('click', '.showImage', function() {
+            var user_id = $(this).data('id'); // Get the user ID from data attribute
+            console.log(user_id);
 
-                                // Apply filter on status change
-                                $('#status-filter').on('change', function() {
-                                    var selectedStatus = $(this).val();
-                                    if (selectedStatus) {
-                                        table.column(8).search('^' + selectedStatus + '$', true, false).draw();
-                                    } else {
-                                        table.column(8).search('').draw();
-                                    }
-                                });
-                            });
-                        
-                            $(document).ready(function() {
-                                $('#dataTable2').DataTable();
-                            });
-                        </script>
+            $.ajax({
+                type: "POST",
+                url: "backend1.php",
+                data: {
+                    'get_image': true,
+                    'user_id': user_id
+                },
+                success: function(response) {
+                    var res = jQuery.parseJSON(response);
+                    console.log(res);
+
+                    if (res.status == 500) {
+                        alert(res.message);
+                    } else {
+                        $('#modalImage').attr('src', 'uploads/' + res.data.images); // Dynamically set the image source
+                        $('#imageModal').modal('show'); // Show the modal
+                    }
+                }
+            });
+        });
+
+        //to shows table
+        $(document).ready(function() {
+            $('#dataTable').DataTable();
+        });
+
+        $(document).ready(function() {
+            // Initialize DataTable
+            var table = $('#dataTable1').DataTable();
+
+            // Apply filter on status change
+            $('#status-filter').on('change', function() {
+                var selectedStatus = $(this).val();
+                if (selectedStatus) {
+                    table.column(8).search('^' + selectedStatus + '$', true, false).draw();
+                } else {
+                    table.column(8).search('').draw();
+                }
+            });
+        });
+
+        $(document).ready(function() {
+            $('#dataTable2').DataTable();
+        });
+        //comments query to insert
+
+        $(document).on('click', '.details', function(e) {
+            e.preventDefault();
+            var user_id = $(this).val();
+            console.log(user_id)
+            $.ajax({
+                type: "POST",
+                url: "backend1.php",
+                data: {
+                    'edit_user': true,
+                    'user_id': user_id
+                },
+                success: function(response) {
+
+                    var res = jQuery.parseJSON(response);
+                    console.log(res);
+                    if (res.status == 500) {
+                        alert(res.message);
+                    } else {
+                        //$('#student_id2').val(res.data.uid);
+
+                        $('#task_id').val(res.data.task_id);
+                        $('#comment_query').val(res.data.comment_query);
+                        $('#comment_reply').val(res.data.comment_reply);
+                        if (res.readonly) {
+                            $('#comment_query').prop('readonly', true);
+                        } else {
+                            $('#comment_query').prop('readonly', false);
+                        }
+                        $('#comment').modal('show');
+                    }
+                }
+            });
+        });
+
+        //view descriotion
+        $(document).on('click', '.viewDescription', function() {
+            var complaintId = $(this).data('id'); // Get the complaint ID from the button's data-id attribute
+            console.log(complaintId);
+            // Send an AJAX request to fetch the description from the database using the complaint ID
+            $.ajax({
+                url: 'backend1.php', // Create this PHP file to handle fetching data
+                method: 'POST',
+                data: {
+                    id: complaintId
+                },
+                success: function(response) {
+                    $('#problem_description').val(response); // Populate the textarea with the fetched description
+                }
+            });
+        });
+
+        //comments query
+
+        $(document).on('submit', '#comment_det', function(e) {
+            e.preventDefault();
+            var formData = new FormData(this);
+            console.log(formData)
+            formData.append("save_edituser", true);
+            $.ajax({
+                type: "POST",
+                url: "backend1.php",
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function(response) {
+                    console.log(response);
+                    var res = jQuery.parseJSON(response);
+                    if (res.status == 200) {
+                        $('#comment').modal('hide');
+                        $('#comment_det')[0].reset();
+                        $('#dataTable1').load(location.href + " #dataTable1");
+                        alertify.success('Query Success');
+
+                    } else if (res.status == 500) {
+                        $('#comment').modal('hide');
+                        $('#comment_det')[0].reset();
+                        console.error("Error:", res.message);
+                        alert("Something Went wrong.! try again")
+                    }
+                }
+            });
+        });
+    </script>
+
 
 </body>
 

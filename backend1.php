@@ -1,7 +1,7 @@
 <?php
-    include "db.php"; 
+include "db.php";
 
-    //requirements approved
+//requirements approved
 if (isset($_POST['approve_user'])) {
     $customer_id = mysqli_real_escape_string($conn, $_POST['user_id']);
 
@@ -73,24 +73,24 @@ if (isset($_POST['save_reason'])) {
     }
 }
 
- //comments query
+//comments query to give by user
 
 if (isset($_POST['edit_user'])) {
     $customer_id = mysqli_real_escape_string($conn, $_POST['user_id']);
-  
+
     $query = "SELECT * FROM manager WHERE task_id='$customer_id'";
     $query_run = mysqli_query($conn, $query);
-  
+
     $User_data = mysqli_fetch_array($query_run);
-  
-  
+
+
     if ($query_run) {
-      $res = [
-        'status' => 200,
-        'message' => 'details Fetch Successfully by id',
-        'data' => $User_data,
-        'readonly' => !empty($User_data['comment_query'])
-    ];
+        $res = [
+            'status' => 200,
+            'message' => 'details Fetch Successfully by id',
+            'data' => $User_data,
+            'readonly' => !empty($User_data['comment_query'])
+        ];
         echo json_encode($res);
         return;
     } else {
@@ -101,22 +101,22 @@ if (isset($_POST['edit_user'])) {
         echo json_encode($res);
         return;
     }
-  }
-  
-  //User edit
-  if (isset($_POST['save_edituser'])) {
+}
+
+//query save user
+if (isset($_POST['save_edituser'])) {
     $customer_id = mysqli_real_escape_string($conn, $_POST['task_id']);
     $query = mysqli_real_escape_string($conn, $_POST['comment_query']);
     $reply = mysqli_real_escape_string($conn, $_POST['comment_reply']);
-  
+
     $query = "UPDATE manager SET comment_query='$query' WHERE task_id='$customer_id'";
     $query_run = mysqli_query($conn, $query);
-  
+
     if ($query_run) {
-      $res = [
-        'status' => 200,
-        'message' => 'details Updated Successfully'
-    ];
+        $res = [
+            'status' => 200,
+            'message' => 'details Updated Successfully'
+        ];
         echo json_encode($res);
         return;
     } else {
@@ -127,11 +127,11 @@ if (isset($_POST['edit_user'])) {
         echo json_encode($res);
         return;
     }
-  }
+}
 
 
-  //get image
-  if (isset($_POST['get_image'])) {
+//get image
+if (isset($_POST['get_image'])) {
     $user_id = $_POST['user_id'];
 
     // Query to fetch the image based on user ID
@@ -154,33 +154,15 @@ if (isset($_POST['edit_user'])) {
 
 
 
-//set color in inprogress work
+//set color in inprogress work by id
 if (isset($_POST['id'])) {
     $complaintId = $_POST['id'];
-    
+
     // Fetch the complaint description based on the ID
     $sql = "SELECT problem_description FROM complaints_detail WHERE id = $complaintId";
     $result = mysqli_query($conn, $sql);
     $row = mysqli_fetch_assoc($result);
-    
+
     // Return the description as the AJAX response
     echo $row['problem_description'];
 }
-
-//piechart backend code
-
-header('Content-Type: application/json');
-$sql = "SELECT type_of_problem, COUNT(*) as count FROM complaints_detail GROUP BY type_of_problem";
-$result = $conn->query($sql);
-
-$data = array();
-while($row = $result->fetch_assoc()) {
-    $data[] = $row;
-}
-echo json_encode($data);
-
-//diamond box backend code
-
-
-
-?>

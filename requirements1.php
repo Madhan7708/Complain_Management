@@ -19,7 +19,7 @@ $result1 = mysqli_query($conn, $sql1);
     <!-- Bootstrap CSS (Optional but recommended) -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
-    <title>MKCE</title>
+    <title>Mkce Complain Management Systems</title>
     <!-- Custom CSS -->
     <link href="dist/css/style.min.css" rel="stylesheet">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -156,7 +156,6 @@ $result1 = mysqli_query($conn, $sql1);
                     <li class="sidebar-item" > <a class="sidebar-link waves-effect waves-dark sidebar-link" href="index.php" aria-expanded="false"><i class="mdi mdi-view-dashboard" ></i><span class="hide-menu">Dashboard</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="requirements1.php" aria-expanded="false"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Requirements</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="complaint.php" aria-expanded="false"><i class="mdi mdi-chart-bubble"></i><span class="hide-menu">Complaint Status</span></a></li>
-                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="tables.html" aria-expanded="false"><i class="mdi mdi-border-inside"></i><span class="hide-menu">Change Password</span></a></li>
                         <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="status.php" aria-expanded="false"><i class="mdi mdi-border-inside"></i><span class="hide-menu">Work Category</span></a></li>
                         
                     </ul>
@@ -315,23 +314,24 @@ $result1 = mysqli_query($conn, $sql1);
             </div>
         </div>
     </div>
-            <!-- ============================================================== -->
-            <!-- End Container fluid  -->
-            <!-- ============================================================== -->
-            <!-- ============================================================== -->
-            <!-- footer -->
-            <!-- ============================================================== -->
-             
-            <footer class="footer text-center">
-            <b> Developed and Maintained by Technology Innovation Hub.</b>
-            </footer>
-            <!-- ============================================================== -->
-            <!-- End footer -->
-            <!-- ============================================================== -->
-        </div>
-        <!-- ============================================================== -->
-        <!-- End Page wrapper  -->
-        <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- End Container fluid  -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- footer -->
+    <!-- ============================================================== -->
+
+    <footer class="footer text-center">
+        <b>2024 © M.Kumarasamy College of Engineering All Rights Reserved.<br>
+            Developed and Maintained by Technology Innovation Hub.</b>
+    </footer>
+    <!-- ============================================================== -->
+    <!-- End footer -->
+    <!-- ============================================================== -->
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Page wrapper  -->
+    <!-- ============================================================== -->
     </div>
 
 
@@ -410,13 +410,16 @@ $result1 = mysqli_query($conn, $sql1);
 
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script>
-        $(document).ready(function() {
-            $('#addnewtask').DataTable();
-        });
+
     </script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/AlertifyJS/1.13.1/alertify.min.js" integrity="sha512-JnjG+Wt53GspUQXQhc+c4j8SBERsgJAoHeehagKHlxQN+MtCCmFDghX9/AcbkkNRZptyZU4zC8utK59M5L45Iw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
+        $(document).ready(function() {
+            $('#addnewtask').DataTable();
+        });
+
+        //requirement approve
         $(document).on('click', '.userapprove', function(e) {
             e.preventDefault();
             var user_id = $(this).val();
@@ -447,6 +450,8 @@ $result1 = mysqli_query($conn, $sql1);
                 });
             }
         });
+
+        //reject 
         $(document).on('submit', '#rejectreason', function(e) {
             e.preventDefault(); // Prevent default form submission
 
@@ -482,7 +487,7 @@ $result1 = mysqli_query($conn, $sql1);
                         // Reload the task or the section after update
                         $('#addnewtask').load(location.href + " #addnewtask");
                         // Show a success message
-                        alertify.error('Rejected Successfully');
+                        alertify.error('Rejected Success');
                     } else {
                         // Handle errors
                         alertify.error('Error Occured');
@@ -503,8 +508,7 @@ $result1 = mysqli_query($conn, $sql1);
             var modal = $(this);
             modal.data('problem_id', problem_id); // Store problem_id in the modal's data attribute
         });
-    </script>
-    <script>
+    
         //image
         // Show image
         $(document).on('click', '.showImage1', function() {
