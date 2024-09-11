@@ -46,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $query7 = "SELECT type_of_problem, COUNT(*) as count FROM complaints_detail GROUP BY type_of_problem";
     $output7 = $conn->query($query7);
 
-    // Initialize an array to store type_of_problem counts
+    //  pie chart count to display Initialize an array to store type_of_problem counts
     $typeOfProblemCounts = array();
     while ($row7 = $output7->fetch_assoc()) {
         $typeOfProblemCounts[] = $row7;
