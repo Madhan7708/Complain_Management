@@ -564,7 +564,7 @@ $result2 = mysqli_query($conn, $sql2);
                                                                         <td>
                                                                             <button type="button" class="btn btn-info showImage" data-toggle="modal" data-target="imageModal" data-id="<?php echo $row['id']; ?>">View</button>
                                                                         </td>
-                                                                        <td class="text-center"><button type="button" class="btn btn-info margin-5" data-toggle="modal" data-target="#reason<?php echo $modal_id; ?>" height="30px" width="30px">View Reason</button></td>
+                                                                        <td class="text-center"><button type="button" class="btn btn-warning margin-5" data-toggle="modal" data-target="#reason<?php echo $modal_id; ?>" height="30px" width="30px">View Reason</button></td>
                                                                         <div class="modal fade" id="reason<?php echo $modal_id; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                                                                             aria-hidden="true">
                                                                             <div class="modal-dialog" role="document">
@@ -827,7 +827,7 @@ $result2 = mysqli_query($conn, $sql2);
                         $('#comment').modal('hide');
                         $('#comment_det')[0].reset();
                         $('#dataTable1').load(location.href + " #dataTable1");
-                        alertify.success('Query Success');
+                        alertify.success('Query Submitted Successfully');
 
                     } else if (res.status == 500) {
                         $('#comment').modal('hide');

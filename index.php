@@ -188,7 +188,7 @@ include("db.php");
               <div class="box bg-warning text-center">
                 <h1 class="font-light text-white"><i class="bi bi-calendar-event"></i></h1>
                 <h6 class="text-white">DOB</h6>
-                <h6 class="text-white"></h6>
+                <h6 class="text-white">07-10-1983</h6>
               </div>
             </div>
           </div>
