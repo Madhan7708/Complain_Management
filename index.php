@@ -138,10 +138,9 @@ include("db.php");
             <h4 class="page-title">Welcome Principal,</h4>
             <div class="ml-auto text-right">
               <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                  <li class="breadcrumb-item"><a href="#">Home</a></li>
-                  <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
-                </ol>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#piechart">
+                  Work Category
+                </button>
               </nav>
               <!-- Button trigger modal -->
 
@@ -294,6 +293,27 @@ include("db.php");
 
   </div>
 
+  <!--to display piechart using modal-->
+  <div class="modal fade" id="piechart" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Work Category</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <canvas id="chartId" aria-label="chart" style="max-width: 100%; max-height: auto;" height="350" width="580"></canvas>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
 
 
 
@@ -322,6 +342,8 @@ include("db.php");
   <script src="assets/libs/flot/jquery.flot.crosshair.js"></script>
   <script src="assets/libs/flot.tooltip/js/jquery.flot.tooltip.min.js"></script>
   <script src="dist/js/pages/chart/chart-page-init.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.1.1/chart.min.js"></script>
+
 
   <script>
     // Fetch the complaint counts when the page loads
@@ -367,6 +389,49 @@ include("db.php");
         }
       });
     }
+
+    //pie chart code
+    async function fetchData() {
+      const response = await fetch('diamondbackend.php', {
+        method: 'POST' // Ensuring it's a POST request as required by your PHP
+      });
+      const data = await response.json();
+      return data.typeOfProblemCounts; // Accessing the specific key where the data is stored
+    }
+
+    function createChart(labels, data) {
+      var ctx = document.getElementById("chartId").getContext("2d");
+      new Chart(ctx, {
+        type: 'pie',
+        data: {
+          labels: labels,
+          datasets: [{
+            label: "Problem Types",
+            data: data,
+            backgroundColor: ['#ff953c', 'aqua', 'pink', 'lightgreen', 'gold', 'lightblue'],
+            hoverOffset: 5
+          }],
+        },
+        options: {
+          responsive: false,
+          plugins: {
+            legend: {
+              position: 'right',
+              align: 'center',
+            },
+          },
+        },
+      });
+    }
+
+    async function initializeChart() {
+      const data = await fetchData();
+      const labels = data.map(item => item.type_of_problem); // Mapping labels from fetched data
+      const counts = data.map(item => item.count); // Mapping counts from fetched data
+      createChart(labels, counts);
+    }
+
+    initializeChart();
   </script>
 
 
