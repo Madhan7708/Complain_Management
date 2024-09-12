@@ -2,8 +2,28 @@
 include("db.php");
 $sql1 = "SELECT complaints_detail.*,worker_taskdet.work_completion_date FROM complaints_detail LEFT JOIN worker_taskdet on complaints_detail.id=worker_taskdet.task_id WHERE complaints_detail.status = 13";
 $result1 = mysqli_query($conn, $sql1);
-$sql2 = "SELECT complaints_detail.*,manager.* FROM complaints_detail LEFT JOIN manager on complaints_detail.id=manager.problem_id WHERE status IN (8, 9,10, 15)";
+$compcount = mysqli_num_rows($result1);
+$sql2 = "SELECT complaints_detail.*,manager.* FROM complaints_detail LEFT JOIN manager on complaints_detail.id=manager.problem_id WHERE status IN (7,10,15)";
 $result2 = mysqli_query($conn, $sql2);
+
+
+//pending count
+$sql3 = "SELECT complaints_detail.*,manager.* FROM complaints_detail LEFT JOIN manager on complaints_detail.id=manager.problem_id WHERE status = 7";
+$result3 = mysqli_query($conn, $sql3);
+$compcount1 = mysqli_num_rows($result3);
+
+//inprogress count
+$sql4 = "SELECT complaints_detail.*,manager.* FROM complaints_detail LEFT JOIN manager on complaints_detail.id=manager.problem_id WHERE status = 10";
+$result4 = mysqli_query($conn, $sql4);
+$compcount2 = mysqli_num_rows($result4);
+
+//reassigned work
+$sql5 = "SELECT complaints_detail.*,manager.* FROM complaints_detail LEFT JOIN manager on complaints_detail.id=manager.problem_id WHERE status = 14";
+$result5 = mysqli_query($conn, $sql5);
+$compcount3 = mysqli_num_rows($result5);
+
+
+
 ?>
 <!DOCTYPE html>
 <html dir="ltr" lang="en">
@@ -228,16 +248,13 @@ $result2 = mysqli_query($conn, $sql2);
                                 <ul class="nav nav-tabs" role="tablist">
                                     <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#completed"
                                             role="tab"><span class="hidden-sm-up"></span> <span
-                                                class="hidden-xs-down"><i class="mdi mdi-book-open"></i>Completed Work</span></a>
+                                                class="hidden-xs-down"><i class="mdi mdi-book-open"></i>Completed Work(<?php echo $compcount ?>)</span></a>
                                     </li>
                                     <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#inprogress"
                                             role="tab"><span class="hidden-sm-up"></span> <span
                                                 class="hidden-xs-down"><i class="mdi mdi-book-open"></i>Work
                                                 Assigned</span></a> </li>
-                                    <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#reassign"
-                                            role="tab"><span class="hidden-sm-up"></span> <span
-                                                class="hidden-xs-down"><i
-                                                    class="mdi mdi-account-multiple"></i>Reassigned Work</span></a> </li>
+                                    
 
                                 </ul>
                                 <!-- Tab panes -->
@@ -351,10 +368,9 @@ $result2 = mysqli_query($conn, $sql2);
                                                         <label for="status-filter">Filter by Status:</label>
                                                         <select id="status-filter" class="form-control" style="width: 200px; display: inline-block;">
                                                             <option value="">All</option>
-                                                            <option value="Worker inProgress">In Progress</option>
-                                                            <option value="Worker Pending">Pending</option>
-                                                            <option value="Worker started to work">Work Started</option>
-                                                            <option value="Sent to Manager for rework">Reassign Requested</option>
+                                                            <option value="Worker inProgress">In Progress (<?php echo $compcount2 ?>)</option>
+                                                            <option value="Worker Pending">Pending (<?php echo $compcount1 ?>)</option>
+                                                            <option value="Work Reassigned">Work Reassigned (<?php echo $compcount3 ?>)</option>
                                                         </select>
                                                     </div>
 
@@ -417,7 +433,7 @@ $result2 = mysqli_query($conn, $sql2);
                                                             </thead>
                                                             <tbody>
                                                                 <?php
-                                                                $sql2 = "SELECT complaints_detail.*,manager.* FROM complaints_detail LEFT JOIN manager on complaints_detail.id=manager.problem_id WHERE status IN (7, 8,9, 15)";
+                                                                $sql2 = "SELECT complaints_detail.*,manager.* FROM complaints_detail LEFT JOIN manager on complaints_detail.id=manager.problem_id WHERE status IN (7,10, 14)";
                                                                 $result2 = mysqli_query($conn, $sql2);
                                                                 $s = 1;
                                                                 while ($row = mysqli_fetch_array($result2)) {
@@ -451,12 +467,10 @@ $result2 = mysqli_query($conn, $sql2);
                                                                         <td class="text-center"><?php
                                                                                                 if ($row['status'] == 7) {
                                                                                                     echo "Worker Pending";
-                                                                                                } elseif ($row['status'] == 8) {
-                                                                                                    echo "Worker started to work";
-                                                                                                } elseif ($row['status'] == 9) {
+                                                                                                } elseif ($row['status'] == 10) {
                                                                                                     echo "Worker inProgress";
                                                                                                 } else {
-                                                                                                    echo "Sent to Manager for rework";
+                                                                                                    echo "Work Reassigned";
                                                                                                 }
                                                                                                 ?></td>
                                                                         <td class="text-center">
@@ -512,93 +526,7 @@ $result2 = mysqli_query($conn, $sql2);
                                         </div>
                                     </div>
 
-                                    <div class="tab-pane" id="reassign" role="tabpanel">
-                                        <div class="p-20">
-                                            <div class="card">
-                                                <div class="card-body" style="padding: 10px;">
-                                                    <div class="table-responsive">
-                                                        <!-- Table for Reassigned tasks -->
-                                                        <table id="dataTable2" class="table table-striped table-bordered">
-                                                            <thead>
-                                                                <tr>
-                                                                    <th class="text-center" style="background:linear-gradient(to bottom right, #cc66ff 1%, #0033cc 100%); color:white"><b>
-                                                                            <h5>S.No</h5>
-                                                                        </b></th>
-                                                                    <th class="text-center" style="background:linear-gradient(to bottom right, #cc66ff 1%, #0033cc 100%); color:white"><b>
-                                                                            <h5>Dept</h5>
-                                                                        </b></th>
-                                                                    <th class="text-center" style="background:linear-gradient(to bottom right, #cc66ff 1%, #0033cc 100%); color:white"><b>
-                                                                            <h5>Block</h5>
-                                                                        </b></th>
-                                                                    <th class="text-center" style="background:linear-gradient(to bottom right, #cc66ff 1%, #0033cc 100%); color:white"><b>
-                                                                            <h5>Venue</h5>
-                                                                        </b></th>
-                                                                    <th class="text-center" style="background:linear-gradient(to bottom right, #cc66ff 1%, #0033cc 100%); color:white"><b>
-                                                                            <h5>Problem Description</h5>
-                                                                        </b></th>
-                                                                    <th class="text-center" style="background:linear-gradient(to bottom right, #cc66ff 1%, #0033cc 100%); color:white"><b>
-                                                                            <h5>Image</h5>
-                                                                        </b></th>
-                                                                    <th class="text-center" style="background:linear-gradient(to bottom right, #cc66ff 1%, #0033cc 100%); color:white"><b>
-                                                                            <h5>Reason</h5>
-                                                                        </b></th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                                <?php
-                                                                $sql3 = "SELECT * FROM complaints_detail WHERE status=14";
-                                                                $result3 = mysqli_query($conn, $sql3);
-                                                                $s = 1;
-                                                                while ($row = mysqli_fetch_array($result3)) {
-                                                                    $modal_id = "problem2" . $s;
-
-                                                                ?>
-                                                                    <tr>
-                                                                        <td class="text-center"><?php echo $s ?></td>
-                                                                        <td class="text-center"><?php echo $row['department'] ?></td>
-                                                                        <td class="text-center"><?php echo $row['block_venue'] ?></td>
-                                                                        <td class="text-center"><?php echo $row['venue_name'] ?></td>
-                                                                        <td><button type="button" class="btn btn-info margin-5 viewDescription" data-id="<?php echo $row['id']; ?>" data-toggle="modal" data-target="#problemModal">View description</button></td>
-
-
-                                                                        <td>
-                                                                            <button type="button" class="btn btn-info showImage" data-toggle="modal" data-target="imageModal" data-id="<?php echo $row['id']; ?>">View</button>
-                                                                        </td>
-                                                                        <td class="text-center"><button type="button" class="btn btn-warning margin-5" data-toggle="modal" data-target="#reason<?php echo $modal_id; ?>" height="30px" width="30px">View Reason</button></td>
-                                                                        <div class="modal fade" id="reason<?php echo $modal_id; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-                                                                            aria-hidden="true">
-                                                                            <div class="modal-dialog" role="document">
-                                                                                <div class="modal-content">
-                                                                                    <div class="modal-header">
-                                                                                        <h5 class="modal-title" id="exampleModalLabel">Reason</h5>
-                                                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                                            <span aria-hidden="true">&times;</span>
-                                                                                        </button>
-                                                                                    </div>
-
-                                                                                    <div class="modal-body">
-                                                                                        <textarea id="feedback" name="feedback" class="form-control" readonly><?php echo $row['feedback'] ?></textarea>
-                                                                                    </div>
-                                                                                    <div class="modal-footer">
-                                                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </tr>
-                                                                    <!-- Add more rows as needed -->
-                                                                <?php
-                                                                    $s++;
-                                                                } ?>
-                                                                <!-- Rows for Reassigned tasks -->
-                                                            </tbody>
-                                                        </table>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    
                                 </div>
 
                                 <!-- ============================================================== -->

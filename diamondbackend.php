@@ -7,49 +7,52 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $response = array();
 
     // Fetch total complaints
-    $query1 = "SELECT COUNT(*) as complain FROM complaints_detail WHERE status > 0";
-    $output1 = mysqli_query($conn, $query1);
-    $row1 = mysqli_fetch_assoc($output1);
-    $response['complainCount'] = $row1['complain'];
+    $q1 = "SELECT COUNT(*) as complain FROM complaints_detail WHERE status > 0";
+    $o1 = mysqli_query($conn, $q1);
+    $r1 = mysqli_fetch_assoc($o1);
+    $response['complainCount'] = $r1['complain'];
 
     // Fetch completed complaints
-    $query2 = "SELECT COUNT(*) as completed FROM complaints_detail WHERE status = '13'";
-    $output2 = mysqli_query($conn, $query2);
-    $row2 = mysqli_fetch_assoc($output2);
-    $response['completedCount'] = $row2['completed'];
+    $q2 = "SELECT COUNT(*) as completed FROM complaints_detail WHERE status = '13'";
+    $o2 = mysqli_query($conn, $q2);
+    $r2 = mysqli_fetch_assoc($o2);
+    $response['completedCount'] = $r2['completed'];
 
     // Fetch in-progress complaints
-    $query3 = "SELECT COUNT(*) as inprogress FROM complaints_detail WHERE status = '10'";
-    $output3 = mysqli_query($conn, $query3);
-    $row3 = mysqli_fetch_assoc($output3);
-    $response['inprogressCount'] = $row3['inprogress'];
+    $q3 = "SELECT COUNT(*) as inprogress FROM complaints_detail WHERE status = '10'";
+    $o3 = mysqli_query($conn, $q3);
+    $r3 = mysqli_fetch_assoc($o3);
+    $response['inprogressCount'] = $r3['inprogress'];
 
     // Fetch pending status
-    $query4 = "SELECT COUNT(*) as pending FROM complaints_detail WHERE (status ='1' OR status ='2' OR status='4' OR status='7' OR status='8')";
-    $output4 = mysqli_query($conn, $query4);
-    $row4 = mysqli_fetch_assoc($output4);
-    $response['pendingCount'] = $row4['pending'];
+    $q4 = "SELECT COUNT(*) as pending FROM complaints_detail WHERE status ='7'";
+    $o4 = mysqli_query($conn, $q4);
+    $r4 = mysqli_fetch_assoc($o4);
+    $response['pendingCount'] = $r4['pending'];
 
     // Fetch request count
-    $query5 = "SELECT COUNT(*) as request FROM complaints_detail WHERE status ='6'";
-    $output5 = mysqli_query($conn, $query5);
-    $row5 = mysqli_fetch_assoc($output5);
-    $response['requestCount'] = $row5['request'];
+    $q5 = "SELECT COUNT(*) as request FROM complaints_detail WHERE status ='6'";
+    $o5 = mysqli_query($conn, $q5);
+    $r5 = mysqli_fetch_assoc($o5);
+    $response['requestCount'] = $r5['request'];
 
     // Fetch reassigned work
-    $query6 = "SELECT COUNT(*) as reassign FROM complaints_detail WHERE status ='14'";
-    $output6 = mysqli_query($conn, $query6);
-    $row6 = mysqli_fetch_assoc($output6);
-    $response['reassignCount'] = $row6['reassign'];
+    $q6 = "SELECT COUNT(*) as reassign FROM complaints_detail WHERE status ='14'";
+    $o6 = mysqli_query($conn, $q6);
+    $r6 = mysqli_fetch_assoc($o6);
+    $response['reassignCount'] = $r6['reassign'];
 
-    // Query to get counts of each type_of_problem
-    $query7 = "SELECT type_of_problem, COUNT(*) as count FROM complaints_detail GROUP BY type_of_problem";
-    $output7 = $conn->query($query7);
+    // Query to get counts of each type_of_problem for pending problems where status 7,10
+    $q7 = "SELECT type_of_problem, COUNT(*) as count 
+       FROM complaints_detail
+       WHERE status IN ('7', '10','17') 
+       GROUP BY type_of_problem";
+    $o7 = $conn->query($q7);
 
     //  pie chart count to display Initialize an array to store type_of_problem counts
-    $typeOfProblemCounts = array();
-    while ($row7 = $output7->fetch_assoc()) {
-        $typeOfProblemCounts[] = $row7;
+    $typeOfProblemCount = array();
+    while ($r7 = $o7->fetch_assoc()) {
+        $typeOfProblemCounts[] = $r7;
     }
     $response['typeOfProblemCounts'] = $typeOfProblemCounts;
 
