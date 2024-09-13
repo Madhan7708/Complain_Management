@@ -42,7 +42,7 @@ if (isset($_POST['save_reason'])) {
         mysqli_begin_transaction($conn);
 
         // First query: Update the status in complaints_detail table
-        $query = "UPDATE complaints_detail SET status='19' WHERE id='$customer_id'";
+        $query = "UPDATE complaints_detail SET status='17' WHERE id='$customer_id'";
         $query_run = mysqli_query($conn, $query);
 
         // Second query: Update the feedback column
@@ -166,10 +166,6 @@ if (isset($_POST['id'])) {
     // Return the description as the AJAX response
     echo $row['problem_description'];
 }
-
-
-
-
 
 
 
