@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $response['inprogressCount'] = $row3['inprogress'];
 
     // Fetch pending status
-    $query4 = "SELECT COUNT(*) as pending FROM complaints_detail WHERE (status ='1' OR status ='2' OR status='4' OR status='7' OR status='8')";
+    $query4 = "SELECT COUNT(*) as pending FROM complaints_detail WHERE status ='7'";
     $output4 = mysqli_query($conn, $query4);
     $row4 = mysqli_fetch_assoc($output4);
     $response['pendingCount'] = $row4['pending'];
@@ -43,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $response['reassignCount'] = $row6['reassign'];
 
     // Query to get counts of each type_of_problem
-    $query7 = "SELECT type_of_problem, COUNT(*) as count FROM complaints_detail GROUP BY type_of_problem";
+    $query7 = "SELECT type_of_problem, COUNT(*) as count FROM complaints_detail WHERE status IN ('7', '10','17') GROUP BY type_of_problem";
     $output7 = $conn->query($query7);
 
     //  pie chart count to display Initialize an array to store type_of_problem counts
