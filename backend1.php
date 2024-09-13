@@ -42,7 +42,7 @@ if (isset($_POST['save_reason'])) {
         mysqli_begin_transaction($conn);
 
         // First query: Update the status in complaints_detail table
-        $query = "UPDATE complaints_detail SET status='17' WHERE id='$customer_id'";
+        $query = "UPDATE complaints_detail SET status='19' WHERE id='$customer_id'";
         $query_run = mysqli_query($conn, $query);
 
         // Second query: Update the feedback column
@@ -82,14 +82,26 @@ if (isset($_POST['edit_user'])) {
     $query_run = mysqli_query($conn, $query);
 
     $User_data = mysqli_fetch_array($query_run);
+    $query_date = $User_data['query_date'];
+    $current_date = date('Y-m-d');
 
+    // Calculate the difference in days between current date and query date
+    $date_diff = (strtotime($current_date) - strtotime($query_date)) / (60 * 60 * 24);
+
+    if($date_diff < 5 && !empty($User_data['comment_query'])){
+        $readonly = true;
+    }// Check if the reply is still empty and 5 days have passed
+    else{
+        $readonly = false; // Make it editable if conditions are met
+    }
 
     if ($query_run) {
         $res = [
             'status' => 200,
             'message' => 'details Fetch Successfully by id',
             'data' => $User_data,
-            'readonly' => !empty($User_data['comment_query'])
+            'readonly' => $readonly,
+            'date_diff' => $date_diff
         ];
         echo json_encode($res);
         return;
@@ -109,7 +121,7 @@ if (isset($_POST['save_edituser'])) {
     $query = mysqli_real_escape_string($conn, $_POST['comment_query']);
     $reply = mysqli_real_escape_string($conn, $_POST['comment_reply']);
 
-    $query = "UPDATE manager SET comment_query='$query' WHERE task_id='$customer_id'";
+    $query = "UPDATE manager SET comment_query='$query',query_date=NOW() WHERE task_id='$customer_id'";
     $query_run = mysqli_query($conn, $query);
 
     if ($query_run) {
@@ -152,6 +164,28 @@ if (isset($_POST['get_image'])) {
     $conn->close();
 }
 
+//after images
+if (isset($_POST['after_image'])) {
+    $user_id = $_POST['user_id'];
+
+    // Query to fetch the image based on user ID
+    $query = "SELECT id, after_photo FROM worker_taskdet WHERE task_id= ?";
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param('i', $user_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        echo json_encode(['status' => 200, 'data' => $row]);
+    } else {
+        echo json_encode(['status' => 500, 'message' => 'Image not found']);
+    }
+
+    $stmt->close();
+    $conn->close();
+}
+
 
 
 //set color in inprogress work by id
@@ -166,7 +200,6 @@ if (isset($_POST['id'])) {
     // Return the description as the AJAX response
     echo $row['problem_description'];
 }
-
 
 
 ?>
