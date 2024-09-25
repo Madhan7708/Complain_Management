@@ -291,7 +291,7 @@ $compcount3 = mysqli_num_rows($result5);
                                                                     </th>
                                                                     <th class="text-center" style="background:linear-gradient(to bottom right, #cc66ff 1%, #0033cc 100%);">
                                                                         <b>
-                                                                            <h5>Problem</h5>
+                                                                            <h5>Complaint</h5>
                                                                         </b>
                                                                     </th>
                                                                     <th class="text-center" style="background:linear-gradient(to bottom right, #cc66ff 1%, #0033cc 100%);">
@@ -332,7 +332,36 @@ $compcount3 = mysqli_num_rows($result5);
                                                                         <td class="text-center"><?php echo $row['department'] ?></td>
                                                                         <td class="text-center"><?php echo $row['block_venue'] ?></td>
                                                                         <td class="text-center"><?php echo $row['venue_name'] ?></td>
-                                                                        <td><button type="button" class="btn btn-info margin-5 viewDescription" data-id="<?php echo $row['id']; ?>" data-toggle="modal" data-target="#problemModal">View description</button></td>
+                                                                        <td class="text-center">
+                                                                            <button type="button" class="btn btn-info margin-5" data-toggle="modal" data-target="#<?php echo $modal_id; ?>">See More</button>
+                                                                        </td>
+
+                                                                        <!-- Modal for Problem Description and Faculty Info -->
+                                                                        <div class="modal fade" id="<?php echo $modal_id; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                            <div class="modal-dialog" role="document">
+                                                                                <div class="modal-content">
+                                                                                    <div class="modal-header" style="background: linear-gradient(to bottom right, #cc66ff 1%, #0033cc 100%); color: white;">
+                                                                                        <h5 class="modal-title" id="exampleModalLabel">Complaint Details</h5>
+                                                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                            <span aria-hidden="true">&times;</span>
+                                                                                        </button>
+                                                                                    </div>
+                                                                                    <div class="modal-body">
+                                                                                        <input type="hidden" name="id" id="id">
+                                                                                        <p><strong>Faculty Id: </strong><?php echo $row['faculty_id'] ?></p>
+                                                                                        <p><strong>Faculty Name: </strong><?php echo $row['faculty_name'] ?></p>
+                                                                                        <p><strong>Email Id: </strong><?php echo $row['faculty_mail'] ?></p>
+                                                                                        <p><strong>Phone No: </strong><?php echo $row['faculty_contact'] ?></p>
+                                                                                        <p><strong>Types of Problems: </strong><?php echo $row['type_of_problem'] ?></p>
+                                                                                        <p><strong>Problem Description: </strong><?php echo $row['problem_description'] ?></p>
+                                                                                    </div>
+                                                                                    <div class="modal-footer">
+                                                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
                                                                         <!--Description id=problem-->
 
                                                                         <td>
@@ -380,7 +409,7 @@ $compcount3 = mysqli_num_rows($result5);
                                                         <!-- Table for In Progress tasks -->
                                                         <table id="dataTable1" class="table table-striped table-bordered">
                                                             <thead>
-                                                                <tr>
+                                                                <tr style="color: white;">
                                                                     <th class="text-center" style="background:linear-gradient(to bottom right, #cc66ff 1%, #0033cc 100%);">
                                                                         <b>
                                                                             <h5>S.No</h5>
@@ -403,7 +432,7 @@ $compcount3 = mysqli_num_rows($result5);
                                                                     </th>
                                                                     <th class="text-center" style="background:linear-gradient(to bottom right, #cc66ff 1%, #0033cc 100%);">
                                                                         <b>
-                                                                            <h5>Problem</h5>
+                                                                            <h5>Complaint</h5>
                                                                         </b>
                                                                     </th>
                                                                     <th class="text-center" style="background:linear-gradient(to bottom right, #cc66ff 1%, #0033cc 100%);">
@@ -449,6 +478,8 @@ $compcount3 = mysqli_num_rows($result5);
                                                                     $is_deadline_exceeded = ($current_date > $deadline_date) ? true : false;
 
                                                                     // Apply the background color if the deadline is exceeded
+                                                                    $row_style = $is_deadline_exceeded ? 'background-color: rgba(255, 0, 0, 0.2);' : '';
+                                                                    /*
                                                                     if ($row['query_date'] != '0000-00-00') {
                                                                         // Calculate the difference in days
                                                                         $query_date = $row['query_date'];
@@ -460,13 +491,40 @@ $compcount3 = mysqli_num_rows($result5);
                                                                         // No style change for invalid or empty query_date
                                                                         $row_style = '';
                                                                     }
+                                                                        */
                                                                 ?>
                                                                     <tr style="<?php echo $row_style; ?>">
                                                                         <td class="text-center"><?php echo $s ?></td>
                                                                         <td class="text-center"><?php echo $row['department'] ?></td>
                                                                         <td class="text-center"><?php echo $row['block_venue'] ?></td>
                                                                         <td class="text-center"><?php echo $row['venue_name'] ?></td>
-                                                                        <td><button type="button" class="btn btn-info margin-5 viewDescription" data-id="<?php echo $row['id']; ?>" data-toggle="modal" data-target="#problemModal">View description</button></td>
+                                                                        <td class="text-center"><button type="button" class="btn btn-info margin-5" data-toggle="modal" data-target="#<?php echo $row['problem_id']; ?>" height="30px" width="30px">See More </button></td>
+                                                                        <div class="modal fade" id="<?php echo $row['problem_id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                            <div class="modal-dialog" role="document">
+                                                                                <div class="modal-content">
+                                                                                    <div class="modal-header" style="background: linear-gradient(to bottom right, #cc66ff 1%, #0033cc 100%); color: white;">
+                                                                                        <h5 class="modal-title" id="exampleModalLabel"> Complaint Details</h5>
+                                                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                            <span aria-hidden="true">&times;</span>
+                                                                                        </button>
+                                                                                    </div>
+                                                                                    <div class="modal-body">
+                                                                                        <input type="hidden" name="id" id="id">
+                                                                                        <p><strong>Faculty Id: </strong><?php echo $row['faculty_id'] ?></p>
+                                                                                        <p><strong>Faculty Name: </strong><?php echo $row['faculty_name'] ?></p>
+                                                                                        <p><strong>Email Id: </strong><?php echo $row['faculty_mail'] ?></p>
+                                                                                        <p><strong>Phone No: </strong><?php echo $row['faculty_contact'] ?></p>
+                                                                                        <p><strong>Types of Problems: </strong><?php echo $row['type_of_problem'] ?></p>
+                                                                                        <p><strong>Problem Description: </strong><?php echo $row['problem_description'] ?></p>
+
+
+                                                                                    </div>
+                                                                                    <div class="modal-footer">
+                                                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
                                                                         <!--Description id=problem-->
 
                                                                         <td>
@@ -491,12 +549,11 @@ $compcount3 = mysqli_num_rows($result5);
                                                                                                                                                         echo 'btn-success'; // Green if both query and reply exist
                                                                                                                                                     } elseif (!empty($row['comment_query']) && empty($row['comment_reply'])) {
                                                                                                                                                         echo 'btn-warning'; // Yellow if only query exists
-                                                                                                                                                    } elseif (!$is_deadline_exceeded) {
-                                                                                                                                                        echo 'btn-secondary'; // Yellow if only query exists
-                                                                                                                                                    } else {
+                                                                                                                                                    }  // Yellow if only query exists
+                                                                                                                                                    else {
                                                                                                                                                         echo 'btn-info'; // Default blue if neither query nor reply exists
                                                                                                                                                     }
-                                                                                                                                                    ?> details " data-toggle="modal" data-target="#comment" <?php echo (!$is_deadline_exceeded) ? 'disabled' : ''; ?>>Comment</button>
+                                                                                                                                                    ?> details " data-toggle="modal" data-target="#comment">Comment</button>
                                                                         </td>
                                                                         <!-- Comment Modal -->
                                                                         <div class="modal fade" id="comment" tabindex="-1" role="dialog" aria-labelledby="rejectModalLabel" aria-hidden="true">
@@ -514,7 +571,7 @@ $compcount3 = mysqli_num_rows($result5);
                                                                                             <!-- Query Field -->
                                                                                             <label class="form-label">Query*</label>
                                                                                             <input type="text" class="form-control" id="comment_query" name="comment_query" placeholder="Enter your query here">
-                                                                                            <input type="text" class="form-control" id="query_date" name="query_date" placeholder="Date of Query Submission" readonly>
+                                                                                            <input type="text" class="form-control" id="query_date" name="query_date" placeholder="Date of Query Submission">
                                                                                             <!-- Reply Field -->
                                                                                             <label class="form-label">Reply*</label>
                                                                                             <input type="text" class="form-control" id="comment_reply" name="comment_reply" placeholder="Reply will be displayed here" readonly>
@@ -573,30 +630,13 @@ $compcount3 = mysqli_num_rows($result5);
     </footer>
     <!--Description id=problem-->
     <!-- Problem Description Modal -->
-    <div class="modal fade" id="problemModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Problem Description</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <textarea id="problem_description" name="problem_description" class="form-control" readonly></textarea>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
+
 
     <!--image modal-->
     <div class="modal fade" id="imageModal" tabindex="-1" role="dialog" aria-labelledby="imageModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <div class="modal-header">
+                <div class="modal-header" style="background: linear-gradient(to bottom right, #cc66ff 1%, #0033cc 100%); color: white;">
                     <h5 class="modal-title" id="imageModalLabel">Problem Image</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
