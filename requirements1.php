@@ -278,7 +278,7 @@ $result1 = mysqli_query($conn, $sql1);
 
                                                                 </div>
                                                                 <div class="modal-footer">
-                                                                    <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -384,7 +384,7 @@ $result1 = mysqli_query($conn, $sql1);
                         <img id="modalImage1" src="" alt="Image" class="img-fluid" style="width:1500px;height:250px;">
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     </div>
                 </form>
             </div>
