@@ -227,7 +227,7 @@ $result1 = mysqli_query($conn, $sql1);
                                                         <h5>Venue</h5>
                                                     </b></th>
                                                 <th class="text-center" style="background:linear-gradient(to bottom right, #cc66ff 1%, #0033cc 100%); color:white;"><b>
-                                                        <h5>Problem Description</h5>
+                                                        <h5>Complaint</h5>
                                                     </b></th>
                                                 <th class="text-center" style="background:linear-gradient(to bottom right, #cc66ff 1%, #0033cc 100%); color:white;"><b>
                                                         <h5>Image</h5>
@@ -235,9 +235,7 @@ $result1 = mysqli_query($conn, $sql1);
                                                 <th class="text-center" style="background:linear-gradient(to bottom right, #cc66ff 1%, #0033cc 100%); color:white;"><b>
                                                         <h5>Date_raised</h5>
                                                     </b></th>
-                                                <th class="text-center" style="background:linear-gradient(to bottom right, #cc66ff 1%, #0033cc 100%); color:white;"><b>
-                                                        <h5>Deadline</h5>
-                                                    </b></th>
+                                                
                                                 <th class="text-center" style="background:linear-gradient(to bottom right, #cc66ff 1%, #0033cc 100%); color:white;"><b>
                                                         <h5>Requirements</h5>
                                                     </b></th>
@@ -262,18 +260,25 @@ $result1 = mysqli_query($conn, $sql1);
                                                     <div class="modal fade" id="<?php echo $row['problem_id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                         <div class="modal-dialog" role="document">
                                                             <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                    <h5 class="modal-title" id="exampleModalLabel">Problem Description</h5>
+                                                                <div class="modal-header"  style="background: linear-gradient(to bottom right, #cc66ff 1%, #0033cc 100%); color: white;">
+                                                                    <h5 class="modal-title" id="exampleModalLabel"> Complaint Details</h5>
                                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                         <span aria-hidden="true">&times;</span>
                                                                     </button>
                                                                 </div>
                                                                 <div class="modal-body">
                                                                     <input type="hidden" name="id" id="id">
-                                                                    <textarea id="problem_description" name="problem_description" class="form-control" readonly><?php echo $row['problem_description'] ?></textarea>
+                                                                    <p><strong>Faculty Id: </strong><?php echo $row['faculty_id'] ?></p>
+                                                                    <p><strong>Faculty Name: </strong><?php echo $row['faculty_name'] ?></p>
+                                                                    <p><strong>Email Id: </strong><?php echo $row['faculty_mail'] ?></p>
+                                                                    <p><strong>Phone No: </strong><?php echo $row['faculty_contact'] ?></p>
+                                                                    <p><strong>Types of Problems: </strong><?php echo $row['type_of_problem'] ?></p>
+                                                                    <p><strong>Problem Description: </strong><?php echo $row['problem_description'] ?></p>
+
+
                                                                 </div>
                                                                 <div class="modal-footer">
-                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                    <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -284,7 +289,7 @@ $result1 = mysqli_query($conn, $sql1);
                                                     </td>
 
                                                     <td><?php echo $row['date_of_reg'] ?></td>
-                                                    <td><?php echo $row['days_to_complete'] ?></td>
+                                                    
                                                     <td><?php echo $row['reason'] ?></td>
                                                     <td>
                                                         <button type="button" value="<?php echo $row['problem_id'] ?>" class="btn btn-success userapprove">Approve</button>
@@ -339,7 +344,7 @@ $result1 = mysqli_query($conn, $sql1);
     <div class="modal fade" id="rejectModal" tabindex="-1" role="dialog" aria-labelledby="rejectModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <div class="modal-header">
+                <div class="modal-header" style="background: linear-gradient(to bottom right, #cc66ff 1%, #0033cc 100%); color: white;">
                     <h5 class="modal-title" id="rejectModalLabel">Reject Problem</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
@@ -351,7 +356,7 @@ $result1 = mysqli_query($conn, $sql1);
                         <textarea name="reason" class="form-control" placeholder="Reason for rejection" required></textarea>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
                         <button type="submit" class="btn btn-danger">Reject</button>
                     </div>
                 </form>
@@ -368,7 +373,7 @@ $result1 = mysqli_query($conn, $sql1);
     <div class="modal fade" id="imageModal1" tabindex="-1" role="dialog" aria-labelledby="imageModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <div class="modal-header">
+                <div class="modal-header" style="background: linear-gradient(to bottom right, #cc66ff 1%, #0033cc 100%); color: white;">
                     <h5 class="modal-title" id="imageModalLabel">Problem Image</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
@@ -379,7 +384,7 @@ $result1 = mysqli_query($conn, $sql1);
                         <img id="modalImage1" src="" alt="Image" class="img-fluid" style="width:1500px;height:250px;">
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
                     </div>
                 </form>
             </div>
