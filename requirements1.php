@@ -255,7 +255,7 @@ $result1 = mysqli_query($conn, $sql1);
                                                     <td><?php echo $row['department'] ?></td>
                                                     <td><?php echo $row['block_venue'] ?></td>
                                                     <td><?php echo $row['venue_name'] ?></td>
-                                                    <td class="text-center"><button type="button" class="btn btn-info margin-5" data-toggle="modal" data-target="#<?php echo $row['problem_id']; ?>" height="30px" width="30px">View description</button></td>
+                                                    <td class="text-center"><button type="button" class="btn btn-info margin-5" data-toggle="modal" data-target="#<?php echo $row['problem_id']; ?>" height="30px" width="30px">View Details</button></td>
                                                     <!--Description id=problem-->
                                                     <div class="modal fade" id="<?php echo $row['problem_id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                         <div class="modal-dialog" role="document">
@@ -268,12 +268,12 @@ $result1 = mysqli_query($conn, $sql1);
                                                                 </div>
                                                                 <div class="modal-body">
                                                                     <input type="hidden" name="id" id="id">
-                                                                    <p><strong>Faculty Id: </strong><?php echo $row['faculty_id'] ?></p>
-                                                                    <p><strong>Faculty Name: </strong><?php echo $row['faculty_name'] ?></p>
-                                                                    <p><strong>Email Id: </strong><?php echo $row['faculty_mail'] ?></p>
-                                                                    <p><strong>Phone No: </strong><?php echo $row['faculty_contact'] ?></p>
-                                                                    <p><strong>Types of Problems: </strong><?php echo $row['type_of_problem'] ?></p>
-                                                                    <p><strong>Problem Description: </strong><?php echo $row['problem_description'] ?></p>
+                                                                    <p><strong>Faculty Id : </strong><?php echo $row['faculty_id'] ?></p>
+                                                                    <p><strong>Faculty Name : </strong><?php echo $row['faculty_name'] ?></p>
+                                                                    <p><strong>Email Id : </strong><?php echo $row['faculty_mail'] ?></p>
+                                                                    <p><strong>Phone No : </strong><?php echo $row['faculty_contact'] ?></p>
+                                                                    <p><strong>Types of Problems : </strong><?php echo $row['type_of_problem'] ?></p>
+                                                                    <p><strong>Problem Description : </strong><?php echo $row['problem_description'] ?></p>
 
 
                                                                 </div>

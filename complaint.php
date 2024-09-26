@@ -333,7 +333,7 @@ $compcount3 = mysqli_num_rows($result5);
                                                                         <td class="text-center"><?php echo $row['block_venue'] ?></td>
                                                                         <td class="text-center"><?php echo $row['venue_name'] ?></td>
                                                                         <td class="text-center">
-                                                                            <button type="button" class="btn btn-info margin-5" data-toggle="modal" data-target="#<?php echo $modal_id; ?>">See More</button>
+                                                                            <button type="button" class="btn btn-info margin-5" data-toggle="modal" data-target="#<?php echo $modal_id; ?>">View Details</button>
                                                                         </td>
 
                                                                         <!-- Modal for Problem Description and Faculty Info -->
@@ -498,7 +498,7 @@ $compcount3 = mysqli_num_rows($result5);
                                                                         <td class="text-center"><?php echo $row['department'] ?></td>
                                                                         <td class="text-center"><?php echo $row['block_venue'] ?></td>
                                                                         <td class="text-center"><?php echo $row['venue_name'] ?></td>
-                                                                        <td class="text-center"><button type="button" class="btn btn-info margin-5" data-toggle="modal" data-target="#<?php echo $row['problem_id']; ?>" height="30px" width="30px">See More </button></td>
+                                                                        <td class="text-center"><button type="button" class="btn btn-info margin-5" data-toggle="modal" data-target="#<?php echo $row['problem_id']; ?>" height="30px" width="30px">View Details</button></td>
                                                                         <div class="modal fade" id="<?php echo $row['problem_id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                             <div class="modal-dialog" role="document">
                                                                                 <div class="modal-content">
