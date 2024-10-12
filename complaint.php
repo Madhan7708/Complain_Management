@@ -542,7 +542,7 @@ $compcount3 = mysqli_num_rows($result5);
                                                                                                                                                         echo 'btn-warning'; // Yellow if only query exists
                                                                                                                                                     }  // Yellow if only query exists
                                                                                                                                                     else {
-                                                                                                                                                        echo 'btn-info'; // Default blue if neither query nor reply exists
+                                                                                                                                                        echo 'btn-primary'; // Default blue if neither query nor reply exists
                                                                                                                                                     }
                                                                                                                                                     ?> details " data-toggle="modal" data-target="#comment">Comment</button>
                                                                         </td>
