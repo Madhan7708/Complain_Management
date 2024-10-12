@@ -8,7 +8,7 @@ if (isset($_POST['approve_user'])) {
     mysqli_begin_transaction($conn);
 
     // First query: Update the status in complaints_detail table
-    $query = "UPDATE complaints_detail SET status='8' WHERE id='$customer_id'";
+    $query = "UPDATE complaints_detail SET status='7' WHERE id='$customer_id'";
     $query_run = mysqli_query($conn, $query);
 
     // Second query: Delete from comments table
@@ -141,6 +141,7 @@ if (isset($_POST['save_edituser'])) {
     }
 }
 
+
 //get image
 if (isset($_POST['get_image'])) {
     $user_id = $_POST['user_id'];
@@ -187,6 +188,18 @@ if (isset($_POST['after_image'])) {
 
 
 
+//set color in inprogress work by id
+if (isset($_POST['id'])) {
+    $complaintId = $_POST['id'];
+
+    // Fetch the complaint description based on the ID
+    $sql = "SELECT problem_description FROM complaints_detail WHERE id = $complaintId";
+    $result = mysqli_query($conn, $sql);
+    $row = mysqli_fetch_assoc($result);
+
+    // Return the description as the AJAX response
+    echo $row['problem_description'];
+}
 
 
 ?>

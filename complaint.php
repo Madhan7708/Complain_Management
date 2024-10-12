@@ -51,12 +51,7 @@ $compcount3 = mysqli_num_rows($result5);
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
     <style>
         .nav-tabs .nav-link {
-            color: #555;
-            /* Default color for tabs */
-            background-color: #f8f9fa;
-            /* Default background color */
-            border: 1px solid transparent;
-            /* Default border */
+            color: #0033cc;
         }
 
         .nav-tabs .nav-link.active {
@@ -64,18 +59,12 @@ $compcount3 = mysqli_num_rows($result5);
             /* Text color when active */
             background: linear-gradient(to bottom right, #cc66ff 1%, #0033cc 100%);
             /* Background color when active */
-            border-color: #989393;
-            border-width: 5px;
+            
             /* Border color when active */
         }
 
         /* Optional: Hover effect */
-        .nav-tabs .nav-link:hover {
-            color: #000;
-            border-color: #989393;
-            border-width: 5px;
-            /* Text color on hover */
-        }
+        
     </style>
 
 </head>
@@ -211,7 +200,7 @@ $compcount3 = mysqli_num_rows($result5);
             <div class="page-breadcrumb">
                 <div class="row">
                     <div class="col-12 d-flex no-block align-items-center">
-                        <h4 class="page-title">Complaint Status</h4>
+                        
                         <div class="ml-auto text-right">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb">
@@ -240,16 +229,17 @@ $compcount3 = mysqli_num_rows($result5);
                     <div class="col">
                         <div class="card">
                             <div class="card-body">
+                            <h4 class="card-title">Complaint Status</h4>
 
                                 <!-- Nav tabs -->
                                 <ul class="nav nav-tabs" role="tablist">
                                     <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#completed"
                                             role="tab"><span class="hidden-sm-up"></span> <span
-                                                class="hidden-xs-down"><i class="mdi mdi-book-open"></i>Completed Work (<?php echo $compcount ?>)</span></a>
+                                                class="hidden-xs-down"><i class="fas fa-check m-b-5 font-15"></i><b>&nbsp Completed Work (<?php echo $compcount ?>)</b></span></a>
                                     </li>
                                     <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#inprogress"
                                             role="tab"><span class="hidden-sm-up"></span> <span
-                                                class="hidden-xs-down"><i class="mdi mdi-book-open"></i>Work
+                                                class="hidden-xs-down"><i class="fas fa-bell m-b-5 font-20"></i>&nbsp Work
                                                 Assigned</span></a> </li>
 
 
@@ -262,6 +252,7 @@ $compcount3 = mysqli_num_rows($result5);
                                             <div class="table-responsive">
                                                 <div class="card">
                                                     <div class="card-body" style="padding: 10px;">
+                                                        
 
                                                         <!-- Dropdown filter for Status -->
 
@@ -333,7 +324,7 @@ $compcount3 = mysqli_num_rows($result5);
                                                                         <td class="text-center"><?php echo $row['block_venue'] ?></td>
                                                                         <td class="text-center"><?php echo $row['venue_name'] ?></td>
                                                                         <td class="text-center">
-                                                                            <button type="button" class="btn btn-info margin-5" data-toggle="modal" data-target="#<?php echo $modal_id; ?>">View Details</button>
+                                                                            <button type="button" class="btn btn-primary margin-5" data-toggle="modal" data-target="#<?php echo $modal_id; ?>">View Details</button>
                                                                         </td>
 
                                                                         <!-- Modal for Problem Description and Faculty Info -->
@@ -366,8 +357,8 @@ $compcount3 = mysqli_num_rows($result5);
 
                                                                         <td>
                                                                             <div class="btn-group">
-                                                                                <button type="button" class="btn btn-info showImage" data-toggle="modal" data-target="imageModal" data-id="<?php echo $row['id']; ?>">Before</button>
-                                                                                <button type="button" class="btn btn-info afterImage" data-toggle="modal" data-target="imageModal" data-id="<?php echo $row['id']; ?>" style="margin:0 10px;">After</button>
+                                                                                <button type="button" class="btn btn-primary showImage" data-toggle="modal" data-target="imageModal" data-id="<?php echo $row['id']; ?>">Before</button>
+                                                                                <button type="button" class="btn btn-primary afterImage" data-toggle="modal" data-target="imageModal" data-id="<?php echo $row['id']; ?>" style="margin:0 10px;">After</button>
                                                                             </div>
                                                                         </td>
 
@@ -498,7 +489,7 @@ $compcount3 = mysqli_num_rows($result5);
                                                                         <td class="text-center"><?php echo $row['department'] ?></td>
                                                                         <td class="text-center"><?php echo $row['block_venue'] ?></td>
                                                                         <td class="text-center"><?php echo $row['venue_name'] ?></td>
-                                                                        <td class="text-center"><button type="button" class="btn btn-info margin-5" data-toggle="modal" data-target="#<?php echo $row['problem_id']; ?>" height="30px" width="30px">View Details</button></td>
+                                                                        <td class="text-center"><button type="button" class="btn btn-primary margin-5" data-toggle="modal" data-target="#<?php echo $row['problem_id']; ?>" height="30px" width="30px">View Details</button></td>
                                                                         <div class="modal fade" id="<?php echo $row['problem_id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                                             <div class="modal-dialog" role="document">
                                                                                 <div class="modal-content">
@@ -528,7 +519,7 @@ $compcount3 = mysqli_num_rows($result5);
                                                                         <!--Description id=problem-->
 
                                                                         <td>
-                                                                            <button type="button" class="btn btn-info showImage" data-toggle="modal" data-target="imageModal" data-id="<?php echo $row['id']; ?>">View</button>
+                                                                            <button type="button" class="btn btn-primary showImage" data-toggle="modal" data-target="imageModal" data-id="<?php echo $row['id']; ?>">View</button>
                                                                         </td>
                                                                         <!--Image id=image-->
 
@@ -571,7 +562,7 @@ $compcount3 = mysqli_num_rows($result5);
                                                                                             <!-- Query Field -->
                                                                                             <label class="form-label">Query*</label>
                                                                                             <input type="text" class="form-control" id="comment_query" name="comment_query" placeholder="Enter your query here">
-                                                                                            <input type="text" class="form-control" id="query_date" name="query_date" placeholder="Date of Query Submission">
+                                                                                            <input type="text" class="form-control" id="query_date" name="query_date" placeholder="Date of Query Submission" readonly>
                                                                                             <!-- Reply Field -->
                                                                                             <label class="form-label">Reply*</label>
                                                                                             <input type="text" class="form-control" id="comment_reply" name="comment_reply" placeholder="Reply will be displayed here" readonly>
@@ -782,22 +773,6 @@ $compcount3 = mysqli_num_rows($result5);
             });
         });
 
-        //view descriotion
-        $(document).on('click', '.viewDescription', function() {
-            var complaintId = $(this).data('id'); // Get the complaint ID from the button's data-id attribute
-            console.log(complaintId);
-            // Send an AJAX request to fetch the description from the database using the complaint ID
-            $.ajax({
-                url: 'backend1.php', // Create this PHP file to handle fetching data
-                method: 'POST',
-                data: {
-                    id: complaintId
-                },
-                success: function(response) {
-                    $('#problem_description').val(response); // Populate the textarea with the fetched description
-                }
-            });
-        });
 
         //comments query
 

@@ -176,7 +176,7 @@ $result1 = mysqli_query($conn, $sql1);
             <div class="page-breadcrumb">
                 <div class="row">
                     <div class="col-12 d-flex no-block align-items-center">
-                        <h4 class="page-title">Requirements Status</h4>
+                        
                         <div class="ml-auto text-right">
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb">
@@ -208,6 +208,7 @@ $result1 = mysqli_query($conn, $sql1);
 
                         <div class="card">
                             <div class="card-body" style="padding: 10px;">
+                            <h4 class="card-title">Requirements Approval</h4>
                                 <div class="table-responsive">
                                     <!--id:addnewtask-->
                                     <table id="addnewtask" class="table table-striped table-bordered">
@@ -255,7 +256,7 @@ $result1 = mysqli_query($conn, $sql1);
                                                     <td><?php echo $row['department'] ?></td>
                                                     <td><?php echo $row['block_venue'] ?></td>
                                                     <td><?php echo $row['venue_name'] ?></td>
-                                                    <td class="text-center"><button type="button" class="btn btn-info margin-5" data-toggle="modal" data-target="#<?php echo $row['problem_id']; ?>" height="30px" width="30px">View Details</button></td>
+                                                    <td class="text-center"><button type="button" class="btn btn-primary margin-5" data-toggle="modal" data-target="#<?php echo $row['problem_id']; ?>" height="30px" width="30px">View Details</button></td>
                                                     <!--Description id=problem-->
                                                     <div class="modal fade" id="<?php echo $row['problem_id']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                         <div class="modal-dialog" role="document">
@@ -285,7 +286,7 @@ $result1 = mysqli_query($conn, $sql1);
                                                     </div>
                                                     <td>
 
-                                                        <button type="button" class="btn btn-info showImage1" data-toggle="modal" data-target="imageModal1" data-id="<?php echo $row['problem_id']; ?>">View</button>
+                                                        <button type="button" class="btn btn-primary showImage1" data-toggle="modal" data-target="imageModal1" data-id="<?php echo $row['problem_id']; ?>">View</button>
                                                     </td>
 
                                                     <td><?php echo $row['date_of_reg'] ?></td>
